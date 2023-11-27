@@ -1,11 +1,15 @@
+import { strapCenter } from "../globals.js";
+
 export default class SlingShot {
   constructor() {
     this.height = height * 0.4;
-    this.handleWidth = this.height * 0.15;
-    this.topPartWidht = this.height * 0.8;
-    this.innerCircleWidth = this.topPartWidht * 0.73;
-    this.handleOffset = this.topPartWidht / 2 - this.innerCircleWidth / 2;
-    this.handleHeight = this.height * 0.6 + this.handleOffset;
+    this.width = this.height * 0.8;
+    this.handleWidth = this.height * 0.12;
+    this.handleHeight = this.height * 0.5;
+    this.strapHeight = this.handleWidth * 0.7;
+
+    strapCenter.y = height - this.height + this.strapHeight / 2;
+    strapCenter.x = width / 2;
   }
 
   drawHandle() {
@@ -18,41 +22,40 @@ export default class SlingShot {
   }
 
   drawTopPart() {
-    arc(
-      width / 2,
-      height - this.handleHeight - this.topPartWidht / 2 + this.handleOffset,
-      this.topPartWidht,
-      this.topPartWidht,
-      0,
-      180
+    rect(
+      width / 2 - this.width / 2,
+      height - this.handleHeight - this.handleWidth,
+      this.width,
+      this.handleWidth
     );
 
-    const bugFixOffset = -this.handleOffset * 0.05;
+    const rectHeight = this.height - this.handleHeight - this.handleWidth;
 
-    fill("black");
-    arc(
-      width / 2,
-      height -
-        this.handleHeight -
-        this.topPartWidht / 2 +
-        this.handleOffset +
-        bugFixOffset,
-      this.innerCircleWidth,
-      this.innerCircleWidth,
-      0,
-      180
+    // left
+    rect(
+      width / 2 - this.width / 2,
+      height - this.height,
+      this.handleWidth,
+      rectHeight
+    );
+
+    // right
+    rect(
+      width / 2 + this.width / 2 - this.handleWidth,
+      height - this.height,
+      this.handleWidth,
+      rectHeight
     );
   }
 
   drawStrap() {
-    const strapWidth = this.innerCircleWidth * 0.8;
+    const strapWidth = (this.width - this.handleWidth * 2) * 0.8;
 
-    fill("white");
     rect(
       width / 2 - strapWidth / 2,
       height - this.height,
       strapWidth,
-      this.handleWidth * 0.7
+      this.strapHeight
     );
   }
 

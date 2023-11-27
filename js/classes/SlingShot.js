@@ -1,10 +1,11 @@
 export default class SlingShot {
   constructor() {
     this.height = height * 0.4;
-    this.width = this.height * 0.2;
     this.handleWidth = this.height * 0.15;
-    this.handleHeight = this.height * 0.8;
-    this.topPartWidht = this.height * 0.9;
+    this.topPartWidht = this.height * 0.8;
+    this.innerCircleWidth = this.topPartWidht * 0.73;
+    this.handleOffset = this.topPartWidht / 2 - this.innerCircleWidth / 2;
+    this.handleHeight = this.height * 0.6 + this.handleOffset;
   }
 
   drawHandle() {
@@ -19,27 +20,46 @@ export default class SlingShot {
   drawTopPart() {
     arc(
       width / 2,
-      height - this.handleHeight,
+      height - this.handleHeight - this.topPartWidht / 2 + this.handleOffset,
       this.topPartWidht,
       this.topPartWidht,
       0,
       180
     );
 
+    const bugFixOffset = -this.handleOffset * 0.05;
+
     fill("black");
     arc(
       width / 2,
-      height - this.handleHeight - 3,
-      this.topPartWidht * 0.73,
-      this.topPartWidht * 0.73,
+      height -
+        this.handleHeight -
+        this.topPartWidht / 2 +
+        this.handleOffset +
+        bugFixOffset,
+      this.innerCircleWidth,
+      this.innerCircleWidth,
       0,
       180
+    );
+  }
+
+  drawStrap() {
+    const strapWidth = this.innerCircleWidth * 0.8;
+
+    fill("white");
+    rect(
+      width / 2 - strapWidth / 2,
+      height - this.height,
+      strapWidth,
+      this.handleWidth * 0.7
     );
   }
 
   draw() {
     this.drawHandle();
     this.drawTopPart();
+    this.drawStrap();
   }
 
   update() {}

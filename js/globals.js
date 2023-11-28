@@ -1,5 +1,3 @@
-import Bomb from "./classes/Bomb.js";
-
 export let strapCenter = { x: undefined, y: undefined };
 export let shapes = [];
 export const COLORS = [

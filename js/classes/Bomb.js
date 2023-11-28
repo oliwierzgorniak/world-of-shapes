@@ -6,20 +6,16 @@ export default class Bomb {
     this.shape = shape;
     this.height = height * 0.1;
     this.width = this.height;
-    this.position = createVector(
-      width / 2 - this.width / 2,
-      strapCenter.y - this.height / 2
-    );
+    this.position = createVector(width / 2, strapCenter.y);
     this.target = createVector(width / 2, height / 2);
     this.hasExploaded = false;
-
-    this.throw();
+    this.isAiming = false;
   }
 
   throw() {
     // potential TODO
-    const xOffset = this.target.x - this.position.x - this.width / 2;
-    const yOffset = this.target.y - this.position.y - this.height / 2;
+    const xOffset = this.target.x - this.position.x;
+    const yOffset = this.target.y - this.position.y;
 
     let distanceMoved = { x: 0, y: 0 };
 
@@ -30,6 +26,9 @@ export default class Bomb {
       this.position.y += step.y;
       distanceMoved.y += step.y;
 
+      this.height -= 5;
+      this.width -= 5;
+
       if (
         Math.abs(distanceMoved.x) >= Math.abs(xOffset) &&
         Math.abs(distanceMoved.y) >= Math.abs(yOffset)
@@ -38,7 +37,7 @@ export default class Bomb {
         clearInterval(intervalId);
         this.hasExploaded = true;
       }
-    }, 100);
+    }, 30);
   }
 
   explode() {
@@ -57,22 +56,50 @@ export default class Bomb {
         shapes.push(getShapeObject(this.shape, position.x, position.y));
       }
     }
+  }
 
-    this.remove;
+  handleAiming() {
+    if (this.isAiming && !mouseIsPressed) {
+      this.isAiming = false;
+      this.throw();
+    }
+
+    if (!mouseIsPressed) return;
+
+    const mouseOverShape =
+      mouseX <= this.position.x + this.width / 2 &&
+      mouseX > this.position.x - this.width / 2 &&
+      mouseY <= this.position.y + this.height / 2 &&
+      mouseY > this.position.x - this.height / 2;
+
+    if (mouseOverShape) this.isAiming = true;
+
+    if (this.isAiming) {
+      let mousePosition = createVector(mouseX, mouseY);
+      this.position = mousePosition;
+      const difference = createVector(
+        mousePosition.x - width / 2,
+        mousePosition.y - strapCenter.y
+      );
+
+      this.target = createVector(
+        width / 2 - difference.x * 2.5,
+        strapCenter.y - difference.y * 2.5
+      );
+      ellipse(this.target.x, this.target.y, 10, 10);
+    }
   }
 
   draw() {
     switch (this.shape) {
       case "circle":
-        push();
-        translate(this.height / 2, this.height / 2);
         ellipse(this.position.x, this.position.y, this.height, this.height);
-        pop();
         break;
     }
   }
 
   display() {
+    this.handleAiming();
     fill(PRIMARY_COLOR);
     this.draw();
   }

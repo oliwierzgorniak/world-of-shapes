@@ -1,5 +1,10 @@
 export let strapCenter = { x: undefined, y: undefined };
 export let shapes = [];
+export let strapPosition = { x: undefined, y: undefined };
+
+// layout colors
+export const BACKGROUND_COLOR = "black";
+export const PRIMARY_COLOR = "white";
 export const COLORS = [
   "#F00", // red
   "#0F0", // green
@@ -20,7 +25,3 @@ export const COLORS = [
   "#CCFFFF", // pale cyan
   "#FFCCFF", // pale magenta
 ];
-
-// layout colors
-export const BACKGROUND_COLOR = "black";
-export const PRIMARY_COLOR = "white";

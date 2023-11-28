@@ -1,4 +1,9 @@
-import { strapCenter, shapes, PRIMARY_COLOR } from "../globals.js";
+import {
+  strapCenter,
+  shapes,
+  PRIMARY_COLOR,
+  strapPosition,
+} from "../globals.js";
 import getShapeObject from "./bomb/getShapeObject.js";
 
 export default class Bomb {
@@ -62,6 +67,8 @@ export default class Bomb {
     if (this.isAiming && !mouseIsPressed) {
       this.isAiming = false;
       this.throw();
+      strapPosition.x = undefined;
+      strapPosition.y = undefined;
     }
 
     if (!mouseIsPressed) return;
@@ -77,6 +84,9 @@ export default class Bomb {
     if (this.isAiming) {
       let mousePosition = createVector(mouseX, mouseY);
       this.position = mousePosition;
+      strapPosition.x = mousePosition.x;
+      strapPosition.y = mousePosition.y;
+
       const difference = createVector(
         mousePosition.x - width / 2,
         mousePosition.y - strapCenter.y

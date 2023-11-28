@@ -9,8 +9,4 @@ export default class Circle extends Shape {
     fill(this.color);
     ellipse(this.position.x, this.position.y, this.size, this.size);
   }
-
-  display() {
-    this.draw();
-  }
 }

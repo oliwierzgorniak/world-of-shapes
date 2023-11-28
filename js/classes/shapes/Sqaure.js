@@ -14,8 +14,4 @@ export default class Square extends Shape {
       this.size
     );
   }
-
-  display() {
-    this.draw();
-  }
 }

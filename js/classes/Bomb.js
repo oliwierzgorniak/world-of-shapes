@@ -3,6 +3,7 @@ import {
   shapes,
   PRIMARY_COLOR,
   strapPosition,
+  shapesOffset,
 } from "../globals.js";
 import getShapeObject from "./bomb/getShapeObject.js";
 
@@ -57,7 +58,10 @@ export default class Bomb {
         const rotationAngle =
           map(x, 0, numberOfShapes * y, 0, 360) + random(-30, 30);
         position.rotate(rotationAngle);
-        position.add(this.target.x, this.target.y);
+        position.add(
+          this.target.x - shapesOffset.x,
+          this.target.y - shapesOffset.y
+        );
         shapes.push(getShapeObject(this.shape, position.x, position.y));
       }
     }

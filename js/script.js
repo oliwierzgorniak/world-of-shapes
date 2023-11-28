@@ -1,6 +1,6 @@
 import SlingShot from "./classes/SlingShot.js";
 import Bomb from "./classes/Bomb.js";
-import { BACKGROUND_COLOR, SHAPES, shapes } from "./globals.js";
+import { BACKGROUND_COLOR, SHAPES, shapes, shapesOffset } from "./globals.js";
 
 let slingShot, bomb;
 let shapeIndex = 0;
@@ -25,9 +25,13 @@ window.draw = function () {
 };
 
 window.addEventListener("keydown", (e) => {
-  console.log(e.key);
+  const MOVE_SPEED = 0.1;
+
   if (e.key === " ") {
     shapeIndex = (shapeIndex + 1) % SHAPES.length;
     bomb = new Bomb(SHAPES[shapeIndex]);
-  }
+  } else if (e.key === "ArrowRight") shapesOffset.x += width * MOVE_SPEED;
+  else if (e.key === "ArrowLeft") shapesOffset.x -= width * MOVE_SPEED;
+  else if (e.key === "ArrowUp") shapesOffset.y -= height * MOVE_SPEED;
+  else if (e.key === "ArrowDown") shapesOffset.y += height * MOVE_SPEED;
 });

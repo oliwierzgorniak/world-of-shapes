@@ -16,8 +16,4 @@ export default class Triangle extends Shape {
       this.position.y - this.size / 2
     );
   }
-
-  display() {
-    this.draw();
-  }
 }

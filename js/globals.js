@@ -1,6 +1,7 @@
 export let strapCenter = { x: undefined, y: undefined };
 export let shapes = [];
 export let strapPosition = { x: undefined, y: undefined };
+export let shapesOffset = { x: 0, y: 0 };
 export const SHAPES = ["circle", "square", "triangle"];
 
 // layout colors

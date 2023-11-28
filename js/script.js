@@ -3,6 +3,7 @@ import Bomb from "./classes/Bomb.js";
 import { BACKGROUND_COLOR, SHAPES, shapes } from "./globals.js";
 
 let slingShot, bomb;
+let shapeIndex = 0;
 
 window.setup = function () {
   angleMode(DEGREES);
@@ -11,7 +12,7 @@ window.setup = function () {
   noStroke();
 
   slingShot = new SlingShot();
-  bomb = new Bomb(random(SHAPES));
+  bomb = new Bomb(SHAPES[shapeIndex]);
 };
 
 window.draw = function () {
@@ -19,6 +20,14 @@ window.draw = function () {
 
   shapes.forEach((shape) => shape.display());
   bomb.display();
-  if (bomb.hasExploaded) bomb = new Bomb(random(SHAPES));
+  if (bomb.hasExploaded) bomb = new Bomb(SHAPES[shapeIndex]);
   slingShot.display();
 };
+
+window.addEventListener("keydown", (e) => {
+  console.log(e.key);
+  if (e.key === " ") {
+    shapeIndex = (shapeIndex + 1) % SHAPES.length;
+    bomb = new Bomb(SHAPES[shapeIndex]);
+  }
+});

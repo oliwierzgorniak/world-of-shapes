@@ -1,8 +1,8 @@
 import SlingShot from "./classes/SlingShot.js";
-import EllipseBomb from "./classes/bombs/EllipseBomb.js";
+import Bomb from "./classes/Bomb.js";
 import { BACKGROUND_COLOR, shapes } from "./globals.js";
 
-let slingShot, ellipseBomb;
+let slingShot, bomb;
 
 window.setup = function () {
   angleMode(DEGREES);
@@ -11,13 +11,14 @@ window.setup = function () {
   noStroke();
 
   slingShot = new SlingShot();
-  ellipseBomb = new EllipseBomb();
+  bomb = new Bomb("circle");
 };
 
 window.draw = function () {
   background(BACKGROUND_COLOR);
 
   shapes.forEach((shape) => shape.display());
-  ellipseBomb.display();
+  bomb.display();
+  if (bomb.hasExploaded) bomb = new Bomb("circle");
   slingShot.display();
 };

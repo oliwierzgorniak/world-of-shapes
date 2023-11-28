@@ -1,6 +1,8 @@
+import { COLORS } from "../../globals.js";
+
 export default class Shape {
-  constructor(x, y, color) {
+  constructor(x, y) {
     this.position = createVector(x, y);
-    this.color = color;
+    this.color = random(COLORS);
   }
 }

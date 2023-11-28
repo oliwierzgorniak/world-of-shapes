@@ -1,3 +1,4 @@
+import { PRIMARY_COLOR } from "../globals.js";
 import { strapCenter } from "../globals.js";
 
 export default class SlingShot {
@@ -22,15 +23,21 @@ export default class SlingShot {
   }
 
   drawTopPart() {
+    // translates here fix gaps between shapes
+    push();
+    translate(0, height * 0.001);
     rect(
       width / 2 - this.width / 2,
       height - this.handleHeight - this.handleWidth,
       this.width,
       this.handleWidth
     );
+    pop();
 
     const rectHeight = this.height - this.handleHeight - this.handleWidth;
 
+    push();
+    translate(0, height * 0.002);
     // left
     rect(
       width / 2 - this.width / 2,
@@ -46,6 +53,7 @@ export default class SlingShot {
       this.handleWidth,
       rectHeight
     );
+    pop();
   }
 
   drawStrap() {
@@ -60,6 +68,7 @@ export default class SlingShot {
   }
 
   draw() {
+    fill(PRIMARY_COLOR);
     this.drawHandle();
     this.drawTopPart();
     this.drawStrap();

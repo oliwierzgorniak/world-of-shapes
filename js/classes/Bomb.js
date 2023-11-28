@@ -65,13 +65,12 @@ export default class Bomb {
 
   handleAiming() {
     if (this.isAiming && !mouseIsPressed) {
+      document.body.style.cursor = "default";
       this.isAiming = false;
       this.throw();
       strapPosition.x = undefined;
       strapPosition.y = undefined;
     }
-
-    if (!mouseIsPressed) return;
 
     const mouseOverShape =
       mouseX <= this.position.x + this.width / 2 &&
@@ -79,9 +78,17 @@ export default class Bomb {
       mouseY <= this.position.y + this.height / 2 &&
       mouseY > this.position.x - this.height / 2;
 
+    if (mouseOverShape) {
+      document.body.style.cursor = "grab";
+    } else {
+      document.body.style.cursor = "default";
+    }
+
+    if (!mouseIsPressed) return;
     if (mouseOverShape) this.isAiming = true;
 
     if (this.isAiming) {
+      document.body.style.cursor = "grabbing";
       let mousePosition = createVector(mouseX, mouseY);
       this.position = mousePosition;
       strapPosition.x = mousePosition.x;

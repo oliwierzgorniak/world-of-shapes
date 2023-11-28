@@ -112,6 +112,24 @@ export default class Bomb {
       case "circle":
         ellipse(this.position.x, this.position.y, this.height, this.height);
         break;
+      case "square":
+        rect(
+          this.position.x - this.width / 2,
+          this.position.y - this.height / 2,
+          this.height,
+          this.height
+        );
+        break;
+      case "triangle":
+        triangle(
+          this.position.x - this.width / 2,
+          this.position.y + this.height / 2,
+          this.position.x + this.width / 2,
+          this.position.y + this.height / 2,
+          this.position.x,
+          this.position.y - this.height / 2
+        );
+        break;
     }
   }
 

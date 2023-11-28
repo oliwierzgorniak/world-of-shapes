@@ -1,6 +1,7 @@
 export let strapCenter = { x: undefined, y: undefined };
 export let shapes = [];
 export let strapPosition = { x: undefined, y: undefined };
+export const SHAPES = ["circle", "square", "triangle"];
 
 // layout colors
 export const BACKGROUND_COLOR = "black";

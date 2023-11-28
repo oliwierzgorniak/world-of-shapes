@@ -1,6 +1,6 @@
 import SlingShot from "./classes/SlingShot.js";
 import Bomb from "./classes/Bomb.js";
-import { BACKGROUND_COLOR, shapes } from "./globals.js";
+import { BACKGROUND_COLOR, SHAPES, shapes } from "./globals.js";
 
 let slingShot, bomb;
 
@@ -11,7 +11,7 @@ window.setup = function () {
   noStroke();
 
   slingShot = new SlingShot();
-  bomb = new Bomb("circle");
+  bomb = new Bomb(random(SHAPES));
 };
 
 window.draw = function () {
@@ -19,6 +19,6 @@ window.draw = function () {
 
   shapes.forEach((shape) => shape.display());
   bomb.display();
-  if (bomb.hasExploaded) bomb = new Bomb("circle");
+  if (bomb.hasExploaded) bomb = new Bomb(random(SHAPES));
   slingShot.display();
 };

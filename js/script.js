@@ -35,6 +35,23 @@ window.addEventListener("keydown", (e) => {
   else if (e.key === "ArrowLeft") shapesOffset.x -= width * MOVE_SPEED;
   else if (e.key === "ArrowUp") shapesOffset.y -= height * MOVE_SPEED;
   else if (e.key === "ArrowDown") shapesOffset.y += height * MOVE_SPEED;
+  else if (e.key === "Backspace")
+    for (let i = shapes.length - 1; i >= 0; i--) shapes.pop();
+  else if (e.key === "m")
+    manualElement.style.display =
+      manualElement.style.display === "none" ? "initial" : "none";
 });
+
+let cameraButtonElement = document.querySelector("#camera-button");
+cameraButtonElement.addEventListener("click", () =>
+  saveCanvas("canvas", "jpg")
+);
+
+let manualElement = document.querySelector("#manual");
+let manualCloseButtonElmenet = document.querySelector("#manual-close-button");
+manualCloseButtonElmenet.addEventListener(
+  "click",
+  () => (manualElement.style.display = "none")
+);
 
 handleDashboard();

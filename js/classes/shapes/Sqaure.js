@@ -1,8 +1,8 @@
 import Shape from "./Shape.js";
 
 export default class Square extends Shape {
-  constructor(x, y) {
-    super(x, y);
+  constructor(x, y, isInfected) {
+    super(x, y, isInfected);
   }
 
   draw() {

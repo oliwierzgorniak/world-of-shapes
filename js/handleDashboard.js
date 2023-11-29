@@ -1,15 +1,20 @@
 import { dashboard } from "./globals.js";
 
 export default function handleDashboard() {
-  let virusInputElement = document.querySelector("#virus-input");
-  virusInputElement.addEventListener("input", (e) => {
-    dashboard.virusMode = e.target.checked;
-  });
-
   let randomInputElement = document.querySelector("#random-input");
   dashboard.random = randomInputElement.checked;
   randomInputElement.addEventListener("input", (e) => {
     dashboard.random = e.target.checked;
+  });
+
+  let virusInputElement = document.querySelector("#virus-input");
+  virusInputElement.addEventListener("input", (e) => {
+    dashboard.virusMode = e.target.checked;
+
+    if (e.target.checked) {
+      dashboard.random = true;
+      randomInputElement.checked = true;
+    }
   });
 
   let sizeInputElement = document.querySelector("#size-input");

@@ -49,7 +49,6 @@ export default class Shape {
       const pos0 = getRealPosition(this);
       const pos1 = getRealPosition(shape);
 
-      // kinda intersects
       const shapesDistance = dist(pos0.x, pos0.y, pos1.x, pos1.y);
       if (shapesDistance < this.size + shape.size) {
         shape.isInfected = true;

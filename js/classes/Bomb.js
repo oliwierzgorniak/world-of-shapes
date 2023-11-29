@@ -4,6 +4,7 @@ import {
   PRIMARY_COLOR,
   strapPosition,
   shapesOffset,
+  dashboard,
 } from "../globals.js";
 import getShapeObject from "./bomb/getShapeObject.js";
 
@@ -52,8 +53,8 @@ export default class Bomb {
       const numberOfShapes = 5;
       for (let x = 0; x < numberOfShapes * y; x++) {
         let position = createVector(
-          height * 0.021 * (drawingLevels - y),
-          height * 0.021 * (drawingLevels - y)
+          height * 0.021 * dashboard.spread * (drawingLevels - y),
+          height * 0.021 * dashboard.spread * (drawingLevels - y)
         );
         const rotationAngle =
           map(x, 0, numberOfShapes * y, 0, 360) + random(-30, 30);

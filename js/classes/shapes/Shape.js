@@ -4,8 +4,10 @@ export default class Shape {
   constructor(x, y) {
     this.position = createVector(x, y);
     this.color = dashboard.random ? random(COLORS) : dashboard.color;
-    console.log(this.color);
-    this.size = random(height * 0.01, height * 0.06);
+    this.size = random(
+      height * 0.01 * dashboard.size,
+      height * 0.06 * dashboard.size
+    );
   }
 
   display() {

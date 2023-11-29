@@ -3,6 +3,7 @@ export let shapes = [];
 export let strapPosition = { x: undefined, y: undefined };
 export let shapesOffset = { x: 0, y: 0 };
 export const SHAPES = ["circle", "square", "triangle"];
+export let dashboard = { color: undefined, random: false, spread: 1, size: 1 };
 
 // layout colors
 export const BACKGROUND_COLOR = "black";

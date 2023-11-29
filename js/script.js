@@ -1,6 +1,7 @@
 import SlingShot from "./classes/SlingShot.js";
 import Bomb from "./classes/Bomb.js";
 import { BACKGROUND_COLOR, SHAPES, shapes, shapesOffset } from "./globals.js";
+import handleDashboard from "./handleDashboard.js";
 
 let slingShot, bomb;
 let shapeIndex = 0;
@@ -35,3 +36,5 @@ window.addEventListener("keydown", (e) => {
   else if (e.key === "ArrowUp") shapesOffset.y -= height * MOVE_SPEED;
   else if (e.key === "ArrowDown") shapesOffset.y += height * MOVE_SPEED;
 });
+
+handleDashboard();

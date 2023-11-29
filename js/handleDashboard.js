@@ -5,6 +5,8 @@ export default function handleDashboard() {
   dashboard.color = colorInputElement.value;
   colorInputElement.addEventListener("input", (e) => {
     dashboard.color = e.target.value;
+    dashboard.random = false;
+    randomInputElement.checked = false;
   });
 
   let randomInputElement = document.querySelector("#random-input");

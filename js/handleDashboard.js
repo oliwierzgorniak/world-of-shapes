@@ -1,12 +1,9 @@
 import { dashboard } from "./globals.js";
 
 export default function handleDashboard() {
-  let colorInputElement = document.querySelector("#color-input");
-  dashboard.color = colorInputElement.value;
-  colorInputElement.addEventListener("input", (e) => {
-    dashboard.color = e.target.value;
-    dashboard.random = false;
-    randomInputElement.checked = false;
+  let virusInputElement = document.querySelector("#virus-input");
+  virusInputElement.addEventListener("input", (e) => {
+    dashboard.virusMode = e.target.checked;
   });
 
   let randomInputElement = document.querySelector("#random-input");
@@ -23,5 +20,13 @@ export default function handleDashboard() {
   let spreadInputElement = document.querySelector("#spread-input");
   spreadInputElement.addEventListener("input", (e) => {
     dashboard.spread = e.target.value;
+  });
+
+  let colorInputElement = document.querySelector("#color-input");
+  dashboard.color = colorInputElement.value;
+  colorInputElement.addEventListener("input", (e) => {
+    dashboard.color = e.target.value;
+    dashboard.random = false;
+    randomInputElement.checked = false;
   });
 }

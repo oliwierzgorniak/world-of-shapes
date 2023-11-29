@@ -63,7 +63,11 @@ export default class Bomb {
           this.target.x - shapesOffset.x,
           this.target.y - shapesOffset.y
         );
-        shapes.push(getShapeObject(this.shape, position.x, position.y));
+
+        const isInfected = dashboard.virusMode ? y === 4 && x === 0 : false;
+        shapes.push(
+          getShapeObject(this.shape, position.x, position.y, isInfected)
+        );
       }
     }
   }

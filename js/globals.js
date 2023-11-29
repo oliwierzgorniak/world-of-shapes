@@ -3,7 +3,14 @@ export let shapes = [];
 export let strapPosition = { x: undefined, y: undefined };
 export let shapesOffset = { x: 0, y: 0 };
 export const SHAPES = ["circle", "square", "triangle"];
-export let dashboard = { color: undefined, random: false, spread: 1, size: 1 };
+export let dashboard = {
+  virusMode: false,
+  color: undefined,
+  random: false,
+  spread: 1,
+  size: 1,
+};
+export let lastInfection = { time: 0 };
 
 // layout colors
 export const BACKGROUND_COLOR = "black";

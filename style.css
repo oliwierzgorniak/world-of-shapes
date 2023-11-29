@@ -43,6 +43,15 @@ body {
   border: 1px solid white;
 }
 
+.manual h2 {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+}
+
+.manual p {
+  margin-bottom: 2em;
+}
+
 .manual dl {
   display: grid;
   grid-template-columns: auto auto;
@@ -51,11 +60,6 @@ body {
 
 .manual dd {
   margin-left: 0;
-}
-
-.manual h2 {
-  margin-top: 0;
-  margin-bottom: 1em;
 }
 
 .manual button {

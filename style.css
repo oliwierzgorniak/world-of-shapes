@@ -117,6 +117,7 @@ body {
   }
 
   .manual {
-    width: 70vw;
+    box-sizing: border-box;
+    width: 90vw;
   }
 }

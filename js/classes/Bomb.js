@@ -85,7 +85,7 @@ export default class Bomb {
       mouseX <= this.position.x + this.width / 2 &&
       mouseX > this.position.x - this.width / 2 &&
       mouseY <= this.position.y + this.height / 2 &&
-      mouseY > this.position.x - this.height / 2;
+      mouseY > this.position.y - this.height / 2;
 
     if (mouseOverShape) {
       document.body.style.cursor = "grab";

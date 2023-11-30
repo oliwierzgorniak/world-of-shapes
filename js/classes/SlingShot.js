@@ -1,5 +1,5 @@
-import { PRIMARY_COLOR } from "../globals.js";
-import { strapCenter, strapPosition } from "../globals.js";
+import { PRIMARY_COLOR } from "../globals/static.js";
+import global from "../globals/dynamic.js";
 
 export default class SlingShot {
   constructor() {
@@ -9,8 +9,8 @@ export default class SlingShot {
     this.handleHeight = this.height * 0.5;
     this.strapHeight = this.handleWidth * 0.7;
 
-    strapCenter.y = height - this.height + this.strapHeight / 2;
-    strapCenter.x = width / 2;
+    global.strapCenter.y = height - this.height + this.strapHeight / 2;
+    global.strapCenter.x = width / 2;
   }
 
   drawHandle() {
@@ -59,12 +59,10 @@ export default class SlingShot {
   drawStrap() {
     const strapWidth = (this.width - this.handleWidth * 2) * 0.8;
 
-    const defaultPosition = {
-      x: width / 2,
-      y: height - this.height + this.strapHeight / 2,
-    };
     const position =
-      typeof strapPosition.x !== "undefined" ? strapPosition : defaultPosition;
+      typeof global.strapPosition.x !== "undefined"
+        ? global.strapPosition
+        : global.strapCenter;
     push();
     translate(-strapWidth / 2, -this.strapHeight / 2);
     rect(position.x, position.y, strapWidth, this.strapHeight);
@@ -78,10 +76,7 @@ export default class SlingShot {
     this.drawStrap();
   }
 
-  update() {}
-
   display() {
-    this.update();
     this.draw();
   }
 }

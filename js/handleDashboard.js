@@ -1,37 +1,37 @@
-import { dashboard } from "./globals.js";
+import global from "./globals/dynamic.js";
 
 export default function handleDashboard() {
   let randomInputElement = document.querySelector("#random-input");
-  dashboard.random = randomInputElement.checked;
+  global.dashboard.random = randomInputElement.checked;
   randomInputElement.addEventListener("input", (e) => {
-    dashboard.random = e.target.checked;
+    global.dashboard.random = e.target.checked;
   });
 
   let virusInputElement = document.querySelector("#virus-input");
   virusInputElement.addEventListener("input", (e) => {
-    dashboard.virusMode = e.target.checked;
+    global.dashboard.virusMode = e.target.checked;
 
     if (e.target.checked) {
-      dashboard.random = true;
+      global.dashboard.random = true;
       randomInputElement.checked = true;
     }
   });
 
   let sizeInputElement = document.querySelector("#size-input");
   sizeInputElement.addEventListener("input", (e) => {
-    dashboard.size = e.target.value;
+    global.dashboard.size = e.target.value;
   });
 
   let spreadInputElement = document.querySelector("#spread-input");
   spreadInputElement.addEventListener("input", (e) => {
-    dashboard.spread = e.target.value;
+    global.dashboard.spread = e.target.value;
   });
 
   let colorInputElement = document.querySelector("#color-input");
-  dashboard.color = colorInputElement.value;
+  global.dashboard.color = colorInputElement.value;
   colorInputElement.addEventListener("input", (e) => {
-    dashboard.color = e.target.value;
-    dashboard.random = false;
+    global.dashboard.color = e.target.value;
+    global.dashboard.random = false;
     randomInputElement.checked = false;
   });
 }

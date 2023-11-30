@@ -1,59 +1,50 @@
-import {
-  COLORS,
-  shapesOffset,
-  dashboard,
-  shapes,
-  lastInfection,
-} from "../../globals.js";
-import getRealPosition from "./getRealPosition.js";
+import { COLORS } from "../../globals/static.js";
+import global from "../../globals/dynamic.js";
+import getRealPosition from "./Shape/getRealPosition.js";
+import getVibrationCoordinate from "./Shape/getVibrationCoordinate.js";
 
 export default class Shape {
   constructor(x, y, isInfected = false) {
     this.position = createVector(x, y);
-    this.color = dashboard.random ? random(COLORS) : dashboard.color;
+    this.color = global.dashboard.random
+      ? random(COLORS)
+      : global.dashboard.color;
     this.size = random(
-      height * 0.01 * dashboard.size,
-      height * 0.06 * dashboard.size
+      height * 0.01 * global.dashboard.size,
+      height * 0.06 * global.dashboard.size
     );
     this.vibrationOffset = { x: 0, y: 0 };
-    this.vibrateRandom = random(0, 100);
+    this.vibrationRandom = random(0, 100);
     this.isInfected = isInfected;
   }
 
   vibrate() {
-    const rangeEnd = width * 0.1;
-    const noiseParameter = millis() * 0.0001 + this.vibrateRandom;
-    this.vibrationOffset.x = map(
-      noise(noiseParameter),
-      0,
-      1,
-      -rangeEnd,
-      rangeEnd
-    );
-    this.vibrationOffset.y = map(
-      noise(noiseParameter + 1),
-      0,
-      1,
-      -rangeEnd,
-      rangeEnd
-    );
+    this.vibrationOffset.x = getVibrationCoordinate(this.vibrationRandom);
+    this.vibrationOffset.y = getVibrationCoordinate(this.vibrationRandom, 1);
   }
 
   infect() {
     if (frameCount % 100 == 0) return;
-    if (Date.now() - lastInfection.time < 50) return;
+    if (Date.now() - global.lastInfection < 50) return;
 
-    for (let shape of shapes) {
+    for (let shape of global.shapes) {
       if (shape.isInfected) continue;
 
-      const pos0 = getRealPosition(this);
-      const pos1 = getRealPosition(shape);
+      const positions = [
+        getRealPosition(this.position, this.vibrationOffset),
+        getRealPosition(shape.position, shape.vibrationOffset),
+      ];
 
-      const shapesDistance = dist(pos0.x, pos0.y, pos1.x, pos1.y);
+      const shapesDistance = dist(
+        positions[0].x,
+        positions[0].y,
+        positions[1].x,
+        positions[1].y
+      );
       if (shapesDistance < this.size + shape.size) {
         shape.isInfected = true;
         shape.color = this.color;
-        lastInfection.time = Date.now();
+        global.lastInfection = Date.now();
         break;
       }
     }
@@ -66,9 +57,10 @@ export default class Shape {
 
   display() {
     this.update();
+
     push();
     translate(this.vibrationOffset.x, this.vibrationOffset.y);
-    translate(shapesOffset.x, shapesOffset.y);
+    translate(global.shapesOffset.x, global.shapesOffset.y);
     fill(this.color);
     this.draw();
     pop();
